@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import ProductsList from '../components/ProductsList';
 import { useHttpClient } from '../../customHooks/http-hook';
 import ProductsSearchBar from '../components/ProductsSearchBar';
 
+import './Products.css';
+
 const Products = () => {
-  const [ loadedProducts, setLoadedProducts ] = useState([]);
+  const [loadedProducts, setLoadedProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const { sendRequest } = useHttpClient();
 
   useEffect(() => {
@@ -15,19 +18,30 @@ const Products = () => {
           'http://localhost:5000/api/products'
         );
 
-        console.log(responseData);
         setLoadedProducts(responseData.products);
-      } catch (err) {}
+        setFilteredProducts(responseData.products);
+      } catch (err) { }
     };
 
     fetchAllProducts();
   }, [sendRequest]);
 
+  const searchProduct = useCallback((keyword) => {
+    console.log(`On search ${keyword}`);
+
+    setFilteredProducts(
+      loadedProducts.filter(product =>
+        product.name.includes(keyword)
+      )
+    );
+  }, [loadedProducts]);
 
   return (
     <React.Fragment>
-      <ProductsSearchBar />
-      <ProductsList items={loadedProducts} />
+      <div className="products-container">
+        <ProductsSearchBar onSearch={searchProduct} />
+        <ProductsList items={filteredProducts} />
+      </div>
     </React.Fragment>
   );
 };
