@@ -1,0 +1,8 @@
+.products-container {
+  list-style: none;
+  padding: 1rem;
+  width: 100%;
+  max-width: 120rem;
+  
+  float: right;
+}

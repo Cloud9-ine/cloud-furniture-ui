@@ -5,24 +5,28 @@ import Products from './products/pages/Products';
 import NewProduct from './products/pages/NewProduct';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import External from './shared/components/External/External';
+import Info from './shared/components/Info/Info';
 
 const App = () => {
   return (
     <Router> 
       <MainNavigation />
       <main>
-        <Switch>
-          <Route path="/" exact>
-            <Products />
-          </Route>
-          <Route path="/products/new" exact>
-            <NewProduct />
-          </Route>
-          <Route path="/products/:pid" exact>
-            <div>TBD</div>
-          </Route>
-          <Redirect to="/" />
-        </Switch>
+        <div className='page'>
+          <Info />
+          <Switch>
+            <Route path="/" exact>
+              <Products />
+            </Route>
+            <Route path="/products/new" exact>
+              <NewProduct />
+            </Route>
+            <Route path="/products/:pid" exact>
+              <div>TBD</div>
+            </Route>
+            <Redirect to="/" />
+          </Switch>
+        </div>
       </main>
       <External />
     </Router>

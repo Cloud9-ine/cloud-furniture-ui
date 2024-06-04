@@ -1,12 +1,12 @@
 .products-search-bar {
   list-style: none;
   margin: 0 auto;
-  padding: 2rem;
-  width: 90%;
-  max-width: 50rem;
+  padding-left: 2rem;
+  padding-bottom: 1rem;
+  max-width: 100rem;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  justify-content: start;
+  gap: 0.5rem;
 }
 
 .products-search-bar__title {
@@ -15,8 +15,24 @@
 
 .products-search-bar__input {
   width: 100%;
-  height: 2rem;
-  max-width: 30rem;
+  height: 2.5rem;
+  max-width: 40rem;
   border-radius: 8px;
   overflow: hidden;
+  
+  text-indent: 10px;
+  font-size: 1rem;
+  font-weight: normal;
+  border: 3px solid #0ABAB5;
+}
+
+.products-search-bar__button {
+  height: 2.5rem;
+  width: 5rem;
+  border-radius: 4px;
+  overflow: hidden;
+
+  font-size: 1rem;
+  font-weight: normal;
+  background-color: #0ABAB5;
 }

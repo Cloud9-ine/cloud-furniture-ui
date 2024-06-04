@@ -1,0 +1,19 @@
+.info-container {
+  list-style: none;
+  padding-left: 2rem;
+  width: 20%;
+  
+  float: left;
+}
+
+.info__avatar {
+  width: 16rem;
+  height: 20rem;
+  margin-right: 2rem;
+}
+
+.info__address {
+  font-size: 1rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: normal;
+}

@@ -7,8 +7,13 @@ import './ProductsList.css';
 const ProductsList = (props) => {
   if (props.items.length === 0) {
     return (
-      <div className='center'>
-        <h2>No Product found.</h2>
+      <div>
+        <div className="products-list">
+          <h2>没有找到相关的物品</h2>
+        </div>
+        <div className="products-list">
+          <h2>No Product found.</h2>
+        </div>
       </div>
     );
   }
