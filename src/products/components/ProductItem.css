@@ -28,8 +28,8 @@
 }
 
 .product-item__image {
-  width: 20rem;
-  height: 20rem;
+  width: 15rem;
+  height: 24rem;
   margin-right: 2rem;
   font-size: 1.5rem;
   font-weight: normal;
@@ -42,6 +42,15 @@
   color: #0ABAB5;
 }
 
+.product-item__info h3 {
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: normal;
+  color: #fad047;
+}
+
+.product-item:hover h1,
+.product-item:active h1,
 .product-item:hover h2,
 .product-item:active h2,
 .product-item:hover h3,

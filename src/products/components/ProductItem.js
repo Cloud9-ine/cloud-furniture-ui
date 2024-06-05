@@ -18,9 +18,9 @@ const ProductItem = (props) => {
             
             <div className="product-item__info">
               <h2>{props.name}</h2>
-              <h4>
+              <h3>
                 单价 Unit Price: ${props.price}
-              </h4>
+              </h3>
               <h4>
                 存量 Quantity: {props.quantity}
               </h4>
