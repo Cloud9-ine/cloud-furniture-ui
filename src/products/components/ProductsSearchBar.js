@@ -32,7 +32,7 @@ const ProductsSearchBar = (props) => {
         className="products-search-bar__button"
         onClick={searchConfirmHandlerClick}
       >
-        Search
+        Press Enter to Search
       </button>
     </div>
   )

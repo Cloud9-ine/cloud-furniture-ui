@@ -3,6 +3,10 @@ import React, { useCallback, useReducer } from 'react';
 import Button from '../../shared/components/FormElements/Button';
 import Input from '../../shared/components/FormElements/Input';
 import { VALIDATOR_REQUIRE } from '../../shared/utils/validators';
+import { useHttpClient } from '../../customHooks/http-hook';
+
+import ImageUpload from '../../shared/components/FormElements/ImageUpload';
+
 import './NewProduct.css';
 
 const formReducer = (currState, action) => {
@@ -39,10 +43,32 @@ const NewProduct = () => {
       description: {
         value: '',
         isValid: false
+      },
+      price: {
+        value: NaN,
+        isValid: false
+      },
+      quantity: {
+        value: NaN,
+        isValid: false
+      },
+      availableDate: {
+        value: '',
+        isValid: false
+      },
+      images: {
+        value: [],
+        isValid: false
+      },
+      tags: {
+        value: [],
+        isValid: true
       }
     },
     isValid: false
   });
+
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const inputHandler = useCallback((id, value, isValid) => {
     dispatch({
@@ -53,9 +79,26 @@ const NewProduct = () => {
     });
   }, []);
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
-    console.log(formState.inputs);
+    try {
+      const formData = new FormData();
+      formData.append('name', formState.inputs.name.value);
+      formData.append('description', formState.inputs.description.value);
+      formData.append('price', formState.inputs.price.value);
+      formData.append('quantity', formState.inputs.quantity.value);
+      formData.append('available_date', formState.inputs.availableDate.value);
+      for (let img of formState.inputs.images.value) {
+        formData.append('images', img);
+      }
+      formData.append('tags', formState.inputs.tags.value);
+
+      const responseData = await sendRequest(
+        'http://localhost:5000/api/products',
+        'POST',
+        formData
+      )
+    } catch (err) {}
   }
 
   return (
@@ -77,6 +120,39 @@ const NewProduct = () => {
           validators={[VALIDATOR_REQUIRE()]} 
           errorText="Please enter a valid Description!"
           onInput={inputHandler}
+        />
+        <Input 
+          id="price"
+          element="input" 
+          type="number" 
+          label="Price" 
+          validators={[VALIDATOR_REQUIRE()]} 
+          errorText="Please enter a valid Price!"
+          onInput={inputHandler}
+        />
+        <Input 
+          id="quantity"
+          element="input" 
+          type="number" 
+          label="Quantity" 
+          validators={[VALIDATOR_REQUIRE()]} 
+          errorText="Please enter a valid Quantity!"
+          onInput={inputHandler}
+        />
+        <Input 
+          id="availableDate"
+          element="input" 
+          type="text" 
+          label="Available Date (YYYY/MM/DD)" 
+          validators={[VALIDATOR_REQUIRE()]} 
+          errorText="Please enter a valid Date!"
+          onInput={inputHandler}
+        />
+        <ImageUpload 
+          id="images" 
+          label="Image"  
+          onInput={inputHandler}
+          center
         />
         <Button type="submit" disabled={!formState.isValid}>
           Create Product
